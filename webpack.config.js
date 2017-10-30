@@ -10,7 +10,7 @@ let homepage = new HtmlWebpackPlugin({
   filename: 'index.html',
   alwaysWriteToDisk: true
 });
-let styles = new ExtractTextPlugin('styles.css')
+let styles = new ExtractTextPlugin('assets/styles.css')
 
 module.exports = {
   entry: './src/entry.js',
@@ -60,7 +60,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'fonts/[name].[ext]'
+              name: 'assets/fonts/[name].[ext]'
             }
           }
         ]
@@ -71,7 +71,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'img/[name].[ext]'
+              name: 'assets/img/[name].[ext]'
             } 
           }
         ]
