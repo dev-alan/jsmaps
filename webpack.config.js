@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 let homepage = new HtmlWebpackPlugin({
   title: 'Welcome',
@@ -10,7 +11,7 @@ let homepage = new HtmlWebpackPlugin({
   filename: 'index.html',
   alwaysWriteToDisk: true
 });
-let styles = new ExtractTextPlugin('assets/styles.css')
+let styles = new ExtractTextPlugin('assets/styles.css');
 
 module.exports = {
   entry: './src/entry.js',
@@ -20,6 +21,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /^australia.js$/,
+        use: []
+      },
       {
         test: /.less$/,
         use: styles.extract({
@@ -82,11 +87,16 @@ module.exports = {
   plugins: [
     homepage,
     styles,
+    new CopyWebpackPlugin([
+      {
+        from: 'src/assets/jsmaps/maps/australia.js', to: 'assets/js/australia.js'
+      }
+    ]),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default'],
+      Raphael: ['webpack-raphael'],
       // In case you imported plugins individually, you must also require them here:
       Util: "exports-loader?Util!bootstrap/js/dist/util",
       Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"

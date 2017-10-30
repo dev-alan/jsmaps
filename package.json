@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
     "ejs-loader": "^0.3.0",
     "ejs-render-loader": "^1.0.0",
@@ -30,7 +31,9 @@
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
     "typeface-lato": "0.0.43",
-    "typeface-nunito-sans": "0.0.43"
+    "typeface-nunito-sans": "0.0.43",
+    "webpack-raphael": "^2.1.4"
   }
 }
