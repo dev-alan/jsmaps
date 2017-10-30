@@ -44,10 +44,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: [
-          // path.resolve(__dirname, "app/src"),
-          // path.resolve(__dirname, "app/test")
-        ],
         use: styles.extract({
           use: [
             {
@@ -58,11 +54,14 @@ module.exports = {
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader',
-        options: {
-          limit: 50000,
-          name: 'fonts/[name].[ext]'
-        },
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[ext]'
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/,
