@@ -13,21 +13,11 @@ let styles = new ExtractTextPlugin('styles.css')
 module.exports = {
   entry: './src/entry.js',
   output: {
-    path: __dirname + '/dist/assets/',
+    path: path.resolve(__dirname, 'dist/assets/'),
     filename: 'bundle.min.js'
   },
   module: {
     rules: [
-      {
-        test: /\.html$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'html-loader'
-            }
-          ]
-        })
-      },
       {
         test: /.less$/,
         use: styles.extract({
@@ -65,6 +55,25 @@ module.exports = {
             }
           ]
         })
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          limit: 50000,
+          name: 'fonts/[name].[ext]'
+        },
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'img/[name].[ext]'
+            } 
+          }
+        ]
       }
     ]
   },
