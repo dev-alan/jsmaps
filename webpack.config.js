@@ -2,19 +2,20 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 let homepage = new HtmlWebpackPlugin({
   title: 'home',
   template: './src/index.ejs',
-  filename: '../index.html'
+  filename: 'index.html'
 });
 let styles = new ExtractTextPlugin('styles.css')
 
 module.exports = {
   entry: './src/entry.js',
   output: {
-    path: path.resolve(__dirname, 'dist/assets/'),
-    filename: 'bundle.min.js'
+    path: path.resolve(__dirname, 'dist/'),
+    filename: 'assets/bundle.min.js'
   },
   module: {
     rules: [
