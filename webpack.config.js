@@ -2,12 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 let homepage = new HtmlWebpackPlugin({
-  title: 'home',
+  title: 'Welcome',
   template: './src/index.ejs',
-  filename: 'index.html'
+  filename: 'index.html',
+  alwaysWriteToDisk: true
 });
 let styles = new ExtractTextPlugin('styles.css')
 
