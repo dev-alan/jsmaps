@@ -22,8 +22,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /^australia.js$/,
-        use: []
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env']
+          }
+        }
       },
       {
         test: /.less$/,
@@ -77,6 +83,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
+              publicPath: '/',
               name: 'assets/img/[name].[ext]'
             }
           }
@@ -90,16 +97,18 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: 'src/assets/jsmaps/maps/australia.js', to: 'assets/js/australia.js'
+      },
+      {
+        from: 'src/images/', to: 'images/'
       }
     ]),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      Raphael: ['webpack-raphael'],
-      // In case you imported plugins individually, you must also require them here:
-      Util: "exports-loader?Util!bootstrap/js/dist/util",
-      Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
+      'Tether': 'tether',
+      'window.Tether': 'tether',
+      Raphael: ['webpack-raphael']
     })
   ]
 };

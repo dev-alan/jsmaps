@@ -1,8 +1,11 @@
 require('typeface-nunito-sans');
 require('typeface-lato');
 require('font-awesome/less/font-awesome.less');
-require('bootstrap/scss/bootstrap-reboot.scss');
-require('bootstrap/scss/bootstrap-grid.scss');
+require('bootstrap/scss/bootstrap.scss');
+require('./assets/eve/eve.js');
 require('webpack-raphael');
+require('owl.carousel');
+require('owl.carousel/dist/assets/owl.carousel.css');
 require('./assets/styles.less');
 require('./assets/global.js');
+require('./assets/img/logo-main.png');

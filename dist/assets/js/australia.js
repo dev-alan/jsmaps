@@ -6,7 +6,11 @@ window.JSMaps.maps.australia = {
 		"onStateOver": function(o) { /* noop */ },
 		"onStateOut": function(o) { /* noop */ },
 		"onStateClick": function(o) {console.log(o.name, o.abbreviation)},
-		"disableTooltip": true
+		"disableTooltip": true,
+		"textPosition": "bottom",
+		"textAreaHeight": 1,
+		"strokeColor": "#ffffff",
+		"displayPreloader": false
 		// "stateClickAction": "url",
 	},
 	"paths": [
@@ -40,14 +44,14 @@ window.JSMaps.maps.australia = {
 			"enable": true,
 			"name": "Australian Capital Territory",
 			"abbreviation": "ACT",
-			"textX": 428,
+			"textX": 425,
 			"textY": 316,
 			"color": "#83ae00",
 			"hoverColor": "#698c00",
 			"selectedColor": "#698c00",
 			"url": "http://jsmaps.io",
 			"text": "",
-			"path": "M392.28,306.01L391.02,305.37L389.58,303.22L389.29,302.43L389.31,300.59L389.83,298.03L392.68,295.93L393.95,296.65L394.52,297.32L395.52,297.69L396.19,298.12L395.7,298.56L394.69,298.42L393.88,298.81L393.36,299.53L392.74,302.02L392.98,304.77L392.9,305.16z M 415,305 440,305 440,325 415,325 Z"
+			"path": "M392.28,306.01L391.02,305.37L389.58,303.22L389.29,302.43L389.31,300.59L389.83,298.03L392.68,295.93L393.95,296.65L394.52,297.32L395.52,297.69L396.19,298.12L395.7,298.56L394.69,298.42L393.88,298.81L393.36,299.53L392.74,302.02L392.98,304.77L392.9,305.16z M 410,305 440,305 440,325 410,325 Z"
 		},
 		{
 			"enable": true,
