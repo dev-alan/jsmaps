@@ -96,12 +96,18 @@ module.exports = {
     styles,
     new CopyWebpackPlugin([
       {
-        from: 'src/assets/jsmaps/maps/australia.js', to: 'assets/js/australia.js'
+        from: 'src/assets/jsmaps/maps/australia.js',
+        to: 'assets/js/australia.js'
       },
       {
-        from: 'src/images/', to: 'images/'
+        from: 'src/images/',
+        to: 'images/'
       }
-    ]),
+    ], {
+      ignore: [
+        '*.psb'
+      ]
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
