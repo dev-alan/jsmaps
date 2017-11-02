@@ -9,3 +9,14 @@ require('owl.carousel/dist/assets/owl.carousel.css');
 require('./assets/index.less');
 require('./assets/global.js');
 require('./assets/img/logo-main.png');
+
+require('./assets/jsmaps/jsmaps-libs.js');
+require('./assets/jsmaps/jsmaps-panzoom.js');
+require('./assets/jsmaps/jsmaps.min.js');
+
+$(function(){
+  $('#map-australia').JSMaps({
+    mapFolder: 'js/',
+    map: 'australia'
+  });
+});

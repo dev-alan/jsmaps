@@ -49,9 +49,9 @@
 .list-flex-row {.list-clear;.flex-row;}
 
 /* overrides */
-.btn {max-width:100%;white-space:normal;.uppercase;letter-spacing:.25rem;}
+.btn {max-width:100%;white-space:normal;.uppercase;letter-spacing:.25rem;font-size:2rem;line-height:3rem;padding:3rem;border-radius:4rem;}
 .btn-primary, a.btn-primary {
-  background:@lime-green;color:@white;border-color:@lime-green;font-size:1.6rem;transform:uppercase;padding-left:2rem;padding-right:2rem;border-radius:2rem;
+  background:@lime-green;color:@white;border-color:@lime-green;
   &:active, &:focus, &:hover, &:not([disabled]):not(.disabled):active, &:not([disabled]):not(.disabled).active, .show > &.dropdown-toggle {
     background:@dark-lime-green;color:@white;border-color:@dark-lime-green;
   }
@@ -85,10 +85,11 @@ html {
     font-size:48%;
   }
 }
-body {.font-nunito-sans;.flex-column;.flex-nowrap;font-size:1.6rem;background:@white;color:@black;min-height:100vh;}
+body {.font-nunito-sans;.flex-column;.flex-nowrap;background:@white;color:@black;min-height:100vh;}
 a {
   color:@lime-green;word-wrap:break-word;
-  &:active, &:focus, &:hover {color:@dark-lime-green;}
+  &:active, &:focus, &:hover {.underline;color:@lime-green;}
 }
 button, .btn {cursor:pointer;}
+a.btn:hover {.no-decoration;}
 .container-fluid-lg {max-width:850px;margin:0 auto;padding:0 15px;}
