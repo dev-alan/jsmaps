@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ htmlWebpackPlugin.options.title }}</title>
+</head>
+<body>
+  
+  {{> ../partials/includes/header.hbs }}
+
+  <main id="page-content">
+    <header>
+      <div class="container-fluid"></div>
+    </header>
+    <div class="content-space">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+            <!-- content -->
+            <div class="row">
+              <div class="col-12">
+                <h1>Heading 1 Style</h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus finibus arcu sed magna ultrices, a vestibulum elit tincidunt. Curabitur sapien purus, lobortis ac bibendum id, iaculis quis ante. Suspendisse potenti. Fusce gravida euismod libero, a eleifend augue ullamcorper et. Etiam dictum nec leo vitae vestibulum.
+                </p>
+                <p>
+                  <a href="#">Active link style</a><br>
+                  <a href="#">Hover link style</a>
+                </p>
+              </div>
+              <div class="col-md-6 col-12">
+                <p>
+                  Suspendisse quis lorem pellentesque, scelerisque nulla vel, tincidunt mauris. Suspendisse lacus nunc, sollicitudin ac vestibulum id, lobortis eu nisi. Donec viverra ante felis, non porttitor velit gravida ut. Morbi rhoncus sollicitudin turpis. Proin erat enim, pulvinar vel lobortis interdum, tristique sed magna. Integer vel luctus est, quis varius tellus.
+                </p>
+                <p>
+                  <a href="#" class="btn btn-primary btn-lg">Button Style <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                </p>
+              </div>
+            </div>
+
+            <!-- /content -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {{> ../partials/includes/footer.hbs }}
+
+</body>
+</html>

@@ -6,6 +6,6 @@ require('./assets/eve/eve.js');
 require('webpack-raphael');
 require('owl.carousel');
 require('owl.carousel/dist/assets/owl.carousel.css');
-require('./assets/styles.less');
+require('./assets/internal.less');
 require('./assets/global.js');
 require('./assets/img/logo-main.png');

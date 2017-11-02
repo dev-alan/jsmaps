@@ -9,21 +9,34 @@ let home_page = new HtmlWebpackPlugin({
   title: 'Homepage Layout',
   template: './src/pages/index.hbs',
   filename: 'index.html',
+  chunks: ['index'],
+  files: {
+    'css': ['css/index.css'],
+    'js': ['js/index.js']
+  },
   alwaysWriteToDisk: true
 });
-// let default_page = new HtmlWebpackPlugin({
-//   title: 'Default Layout',
-//   template: './src/default.ejs',
-//   filename: 'default.html',
-//   alwaysWriteToDisk: true
-// });
-let styles = new ExtractTextPlugin('assets/styles.css');
+let default_page = new HtmlWebpackPlugin({
+  title: 'Default Layout',
+  template: './src/pages/default.hbs',
+  filename: 'default.html',
+  chunks: ['internal'],
+  files: {
+    'css': ['css/internal.css'],
+    'js': ['js/internal.js']
+  },
+  alwaysWriteToDisk: true
+});
+let styles = new ExtractTextPlugin('assets/css/[name].styles.css');
 
 module.exports = {
-  entry: './src/entry.js',
+  entry: {
+    index: './src/index.js',
+    internal: './src/internal.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist/'),
-    filename: 'assets/bundle.min.js'
+    filename: 'assets/js/[name].js'
   },
   module: {
     rules: [
@@ -103,7 +116,7 @@ module.exports = {
   },
   plugins: [
     home_page,
-    // default_page,
+    default_page,
     styles,
     new CopyWebpackPlugin([
       {
