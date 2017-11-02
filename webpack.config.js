@@ -5,12 +5,18 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-let homepage = new HtmlWebpackPlugin({
-  title: 'Welcome',
-  template: './src/index.ejs',
+let home_page = new HtmlWebpackPlugin({
+  title: 'Homepage Layout',
+  template: './src/pages/index.hbs',
   filename: 'index.html',
   alwaysWriteToDisk: true
 });
+// let default_page = new HtmlWebpackPlugin({
+//   title: 'Default Layout',
+//   template: './src/default.ejs',
+//   filename: 'default.html',
+//   alwaysWriteToDisk: true
+// });
 let styles = new ExtractTextPlugin('assets/styles.css');
 
 module.exports = {
@@ -21,6 +27,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.hbs$/,
+        loader: 'handlebars-loader'
+      },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
@@ -92,7 +102,8 @@ module.exports = {
     ]
   },
   plugins: [
-    homepage,
+    home_page,
+    // default_page,
     styles,
     new CopyWebpackPlugin([
       {
