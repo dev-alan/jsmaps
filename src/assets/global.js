@@ -42,7 +42,7 @@ $(function () {
       });
     },
     loadMobileMenu() {
-      mobileTrigger.addEventListener('click', e => {
+      mobileTrigger.addEventListener('click', e => {   
         e.preventDefault;
         body.getAttribute('data-menu-open') === 'true' ? body.setAttribute('data-menu-open', 'false') : body.setAttribute('data-menu-open', 'true');
       });

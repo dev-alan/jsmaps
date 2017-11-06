@@ -12,5 +12,11 @@ p {margin:0 0 4rem;}
 
 #page-content {
   .pos-relative;z-index:5;background:@white;padding:5rem 0 7.5rem;
-  
+  .page-header {
+    color:@white;.text-center;
+    .heading {
+      margin:0;font-weight:700;font-size:6rem;line-height:(8 / 6em);padding:1rem;.pos-relative;
+      &:after {content:' ';height:.2rem;background:@lime-green;width:220rem;.pos-absolute;left:50%;top:100%;transform:translateX(-50%);}
+    }
+  }
 }
