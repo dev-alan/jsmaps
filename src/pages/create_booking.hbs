@@ -20,37 +20,80 @@
         </div>
       </div>
     </header>
-    <div class="content-space">
+    <div class="content-space no-padding">
       <!-- content -->
-        <div id="app-booking-form">
-          <div class="step" data-step="1">
+        <form id="app-booking-form">
+          <div class="step" data-step="1" v-show="currentStep >= 1" style="display:none;">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-12">
-                  <span v-text="name"></span>
+                  <h2 class="h1"><span class="icon">1</span> Select your State</h2>
+                  <div class="form-group">
+                    <select class="form-control" name="state" v-model="selectedState" v-on:change="updateState">
+                      <option value="" v-if="states.length > 1 || states.length === 0">-- select --</option>
+                      <option v-bind:value="state" v-for="state of states" v-text="state"></option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="step" data-step="2">
+          <div class="step" data-step="2" v-show="currentStep >= 2" style="display:none;">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-12">
-          
+                  <h2 class="h1"><span class="icon">2</span> Select the Market you want to Advertise in</h2>
+                  <div class="form-inline">
+                    <div class="form-group">
+                      <label for="booking-form-region" class="label">Region</label>
+                      <select name="region" id="booking-form-region" class="form-control" v-model="selectedRegion" v-on:change="updateRegion">
+                        <option value="" v-if="regions.length > 1 || regions.length === 0">-- select --</option>
+                        <option v-bind:value="region" v-for="region of regions" v-text="region"></option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="booking-form-town" class="label">Town</label>
+                      <select name="town" id="booking-form-town" class="form-control" v-model="selectedTown" v-on:change="updateTown">
+                        <option value="" v-if="towns.length > 1 || towns.length === 0">-- select --</option>
+                        <option v-bind:value="town" v-for="town of towns" v-text="town"></option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="booking-form-radio-station" class="label">Radio Station</label>
+                      <select name="radio_station" id="booking-form-radio-station" class="form-control" v-model="selectedRadioStation" v-on:change="updateRadioStation">
+                        <option value="" v-if="radioStations.length > 1 || radioStations.length === 0">-- select --</option>
+                        <option v-bind:value="radioStation[0]" v-for="radioStation of radioStations" v-text="radioStation[1]"></option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="booking-form-time-slot" class="label">Time Slot</label>
+                      <select name="time_slot" id="booking-form-time-slot" class="form-control" v-model="selectedTimeSlot">
+                        {{!-- <option value="">-- select --</option> --}}
+                        <option value="Session Times">Session Times</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="booking-form-ad-type" class="label">Ad Type</label>
+                      <select name="ad_type" id="booking-form-ad-type" class="form-control" v-model="selectedAdType">
+                        {{!-- <option value="">-- select --</option> --}}
+                        <option value="Recorded">Recorded</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="step" data-step="3">
+          <div class="step" data-step="3" v-show="currentStep >= 3" style="display:none;">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-12">
-          
+                  <h2 class="h1"><span class="icon">3</span> Select your Run of Station</h2>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       <!-- /content -->
     </div>
   </main>
