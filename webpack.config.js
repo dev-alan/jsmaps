@@ -27,6 +27,17 @@ let default_page = new HtmlWebpackPlugin({
   },
   alwaysWriteToDisk: true
 });
+let login_page = new HtmlWebpackPlugin({
+  title: 'Login Layout',
+  template: './src/pages/login.hbs',
+  filename: 'login.html',
+  chunks: ['internal'],
+  files: {
+    'css': ['css/internal.css'],
+    'js': ['js/internal.js']
+  },
+  alwaysWriteToDisk: true
+});
 let styles = new ExtractTextPlugin('assets/css/[name].styles.css');
 
 module.exports = {
@@ -117,6 +128,7 @@ module.exports = {
   plugins: [
     home_page,
     default_page,
+    login_page,
     styles,
     new CopyWebpackPlugin([
       {

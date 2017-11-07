@@ -5,7 +5,7 @@
 @import 'footer';
 
 body {font-size:2.2rem;line-height:(3 / 2.2em);.light;}
-h1, .h1 {color:@royal-blue;font-size:5rem;line-height:(6 / 5em);.extra-light;margin:0 0 3rem;}
+h1, .h1 {color:@dark-royal-blue;font-size:5rem;line-height:(6 / 5em);.extra-light;margin:0 0 3rem;}
 h2, .h2 {color:@black;font-size:3rem;line-height:(4.5 / 3em);.extra-light;margin:3.5rem 0 1.6rem;}
 // h3, .h3 {color:@mid-grey;font-size:1.8rem;line-height:(2.4 / 1.8em);margin:0 0 1.6rem;.uppercase;.bold;}
 p {margin:0 0 4rem;}
@@ -26,4 +26,38 @@ p {margin:0 0 4rem;}
     }
   }
   .content-space {padding:5rem 0;background:@white;}
+}
+
+.login-area {
+  box-shadow:0 .1rem .1rem .1rem fade(@black,10);background:@royal-blue;color:@white;padding:6rem;.flex-column;.flex-nowrap;margin:0;height:100%;
+
+  @media(max-width:@lg) {
+    padding:4rem;
+  }
+
+  a {color:@lime-green;}
+  h2 {color:@white;margin:0 0 3rem;}
+  .form-group {
+    margin:0;
+    & + .form-group {margin:2rem 0 0;}
+    .form-control {border-color:@white;}
+  }
+  .small {.bold;font-size:1.8rem;}
+}
+
+.registration-area {
+  box-shadow:0 .1rem .1rem .1rem fade(@black,10);border-color:@light-grey;padding:6rem;.flex-column;.flex-nowrap;margin:0;height:100%;background:@white;
+
+  @media(max-width:@lg) {
+    padding:4rem;
+  }
+
+  h2 {margin:0 0 1rem;color:@dark-royal-blue;}
+  .deco {
+    flex:1 1 auto;background:url(img/bg-registration-area-sm.svg) 50% 0 no-repeat;margin:-1.5rem -6rem -6rem;
+    
+    @media(max-width:@lg) {
+      margin:-1.5rem -4rem -4rem;
+    }
+  }
 }

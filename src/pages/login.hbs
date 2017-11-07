@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ htmlWebpackPlugin.options.title }}</title>
+</head>
+<body>
+  
+  {{> ../partials/includes/header.hbs }}
+
+  <main id="page-content">
+    <header class="page-header" data-background="images/bg-page-header-default.jpg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <p class="heading">Account Login</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="content-space">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+            <!-- content -->
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="login-area">
+                  <h2>Login to your account</h2>
+                  <form action="#">
+                    <div class="form-group">
+                      <label for="login-username" class="label">Username</label>
+                      <input type="text" id="login-username" name="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="login-password" class="label">Password</label>
+                      <input type="text" id="login-password" name="" class="form-control">
+                    </div>
+                    <p class="text-right"><small><a href="#">Forgot password?</a></small></p>
+                    <div class="button-wrapper text-center">
+                      <button type="submit" class="btn btn-primary">Login <i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="registration-area">
+                  <h2>Create an account</h2>
+                  <p>Lorem ipsum dolor sit amet, mus consectetur adipiscing elit. Viva finibus arcu magna ultrices. vestibulum elit tincidunt.</p>
+                  <p class="text-center"><a href="#" class="btn btn-primary">Register <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></p>
+                  <div class="deco"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /content -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {{> ../partials/includes/footer.hbs }}
+
+</body>
+</html>
