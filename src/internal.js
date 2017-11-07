@@ -1,3 +1,4 @@
+require('vue');
 require('typeface-nunito-sans');
 require('typeface-lato');
 require('font-awesome/less/font-awesome.less');

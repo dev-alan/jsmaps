@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ htmlWebpackPlugin.options.title }}</title>
+</head>
+<body>
+  
+  {{> ../partials/includes/header.hbs }}
+
+  <main id="page-content">
+    <header class="page-header" data-background="images/bg-page-header-default.jpg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <p class="heading">Book your Radio Rates</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="content-space">
+      <!-- content -->
+        <div id="app-booking-form">
+          <div class="step" data-step="1">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+                  <span v-text="name"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="step" data-step="2">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+          
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="step" data-step="3">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+          
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- /content -->
+    </div>
+  </main>
+
+  {{> ../partials/includes/footer.hbs }}
+
+</body>
+</html>

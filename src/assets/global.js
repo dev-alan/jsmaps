@@ -1,4 +1,4 @@
-
+import Vue from 'vue';
 $(function () {
   const body = document.querySelector('body');
   const mobileTrigger = document.querySelector('#mobile-menu-trigger');
@@ -8,6 +8,20 @@ $(function () {
       this.loadMobileMenu();
       this.loadCarousel();
       this.loadBackgroundImages();
+      this.loadBookingForm();
+    },
+    loadBookingForm() {
+      if(document.querySelector('#app-booking-form')) {
+        let bookingForm = new Vue({
+          el: '#app-booking-form',
+          data: {
+            name: 'me'
+          },
+          onMount() {
+            console.log('mounted')
+          }
+        });
+      }
     },
     loadBackgroundImages() {
       Array.prototype.slice.call(document.querySelectorAll('[data-background]')).forEach((el) => {

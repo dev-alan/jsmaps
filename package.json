@@ -42,6 +42,7 @@
     "tether": "^1.4.0",
     "typeface-lato": "0.0.43",
     "typeface-nunito-sans": "0.0.43",
+    "vue": "^2.5.3",
     "webpack-raphael": "^2.1.4"
   }
 }

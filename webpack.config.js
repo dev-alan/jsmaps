@@ -38,6 +38,17 @@ let login_page = new HtmlWebpackPlugin({
   },
   alwaysWriteToDisk: true
 });
+let create_booking_page = new HtmlWebpackPlugin({
+  title: 'Create Booking Layout',
+  template: './src/pages/create_booking.hbs',
+  filename: 'create_booking.html',
+  chunks: ['internal'],
+  files: {
+    'css': ['css/internal.css'],
+    'js': ['js/internal.js']
+  },
+  alwaysWriteToDisk: true
+});
 let styles = new ExtractTextPlugin('assets/css/[name].styles.css');
 
 module.exports = {
@@ -129,6 +140,7 @@ module.exports = {
     home_page,
     default_page,
     login_page,
+    create_booking_page,
     styles,
     new CopyWebpackPlugin([
       {
@@ -152,5 +164,10 @@ module.exports = {
       'window.Tether': 'tether',
       Raphael: ['webpack-raphael']
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js'
+    }
+  }
 };
