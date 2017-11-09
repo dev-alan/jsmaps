@@ -118,7 +118,241 @@
             <div class="container-fluid">
               <div class="row">
                 <div class="col-12">
-                  <h2 class="h1"><span class="icon">3</span> Select your Run of Station</h2>
+                  <h2 class="h1"><span class="icon">3</span> Select your Session Times</h2>
+
+                  <div v-if="sessionTimes" class="audience-stats">
+                    <h3 class="title" v-text="sessionTimes.station + (sessionTimes.region ? ', ' + sessionTimes.region : '') + (sessionTimes.state &&  !sessionTimes.region.match(sessionTimes.state)? ' ' + sessionTimes.state : '')"></h3>
+                    <ul>
+                      <li data-stats="audience">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">Audience</span>
+                            <span class="value" v-text="sessionTimes.audience"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="people-10-17">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">People 10-17</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_mon_to_sun_people_10_17"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="people-18-24">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">People 18-24</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_mon_to_sun_people_18_24"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="people-25-39">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">People 25-39</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_mon_to_sun_people_25_39"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="people-40-54">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">People 40-54</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_mon_to_sun_people_40_54"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="breakfast">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">Breakfast</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_mon_to_fri_breakfast + '%'"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="morning">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">Morning</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_mon_to_fri_morning + '%'"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="afternoon">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">Afternoon</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_mon_to_fri_afternoons + '%'"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="drive">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">Drive</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_mon_to_fri_drive + '%'"></span>
+                          </div>
+                        </div>
+                      </li>
+                      <li data-stats="weekend">
+                        <div class="item">
+                          <div class="entry">
+                            <span class="title">Weekends</span>
+                            <span class="value" v-text="sessionTimes.share_audience_percent_sat_to_sun_weekends + '%'"></span>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="session-time">
+                    
+                    <table class="recorded-advertising-table table">
+                      <caption>
+                        <h3>Recorded Advertising</h3>
+                      </caption>
+                      <thead>
+                        <tr>
+                          <th data-column="session">Session</th>
+                          <th data-column="day">
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thur</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            <span>Sun</span>
+                          </th>
+                          <th data-column="active-weeks">Active Weeks</th>
+                          <th data-column="week-commencing">Week Commencing</th>
+                          <th data-column="estimate">Estimate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(prop, key) in currentRecordedAdvertisingItem">
+                          <td data-column="session">
+                            <div>
+                              <strong v-text="prop.sessionInfo.title"></strong>
+                              <span v-text="prop.sessionInfo.timeSlot"></span>
+                            </div>
+                          </td>
+                          <td data-column="day">
+                            <span class="number-wrapper" data-label="Mon">
+                              <input type="number" min="0" class="form-control">
+                            </span>
+                            <span class="number-wrapper" data-label="Tue">
+                              <input type="number" min="0" class="form-control">
+                            </span>
+                            <span class="number-wrapper" data-label="Wed">
+                              <input type="number" min="0" class="form-control">
+                            </span>
+                            <span class="number-wrapper" data-label="Thur">
+                              <input type="number" min="0" class="form-control">
+                            </span>
+                            <span class="number-wrapper" data-label="Fri">
+                              <input type="number" min="0" class="form-control">
+                            </span>
+                            <span class="number-wrapper" data-label="Say">
+                              <input type="number" min="0" class="form-control">
+                            </span>
+                            <span class="number-wrapper" data-label="Sun">
+                              <input type="number" min="0" class="form-control">
+                            </span>
+                          </td>
+                          <td data-column="active-weeks">
+                            <input type="number" class="form-control">
+                          </td>
+                          <td data-column="week-commencing">
+                            <select class="form-control">
+                              <option value="">Select a date</option>
+                              <option value="Mon 3rd Jul 2017">Mon 3rd Jul 2017</option>
+                            </select>
+                          </td>
+                          <td data-column="estimate">
+                            <span class="subtotal"></span>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="4" class="text-right"><strong>Total Estimate</strong></td>
+                          <td><span>$5,000</span></td>
+                        </tr>
+                      </tfoot>
+                    </table>
+
+                    <table class="sponsorship-table table">
+                      <caption>
+                        <h3>Sponsorship</h3>
+                      </caption>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <span class="checkbox-wrapper">
+                              <input type="checkbox" id="sponsorship-news" name="sponsorship" value="News" v-model="sponsorship.news.checked">
+                              <label class="label" for="sponsorship-news">News</label>
+                            </span>
+                          </td>
+                          <td>
+                            <span class="checkbox-wrapper">
+                              <input type="checkbox" id="sponsorship-sport" name="sponsorship" value="Sport" v-model="sponsorship.sport.checked">
+                              <label class="label" for="sponsorship-sport">Sport</label>
+                            </span>
+                          </td>
+                          <td>
+                            <span class="checkbox-wrapper">
+                              <input type="checkbox" id="sponsorship-weather" name="sponsorship" value="Weather" v-model="sponsorship.weather.checked">
+                              <label class="label" for="sponsorship-weather">Weather</label>
+                            </span>
+                          </td>
+                          <td>
+                            <span class="checkbox-wrapper">
+                              <input type="checkbox" id="sponsorship-traffic" name="sponsorship" value="Traffic" v-model="sponsorship.traffic.checked">
+                              <label class="label" for="sponsorship-traffic">Traffic</label>
+                            </span>
+                          </td>
+                          <td>
+                            <span class="checkbox-wrapper">
+                              <input type="checkbox" id="sponsorship-finance" name="sponsorship" value="Finance" v-model="sponsorship.finance.checked">
+                              <label class="label" for="sponsorship-finance">Finance</label>
+                            </span>
+                          </td>
+                          <td>
+                            <span class="checkbox-wrapper">
+                              <input type="checkbox" id="sponsorship-entertainment" name="sponsorship" value="Entertainment" v-model="sponsorship.entertainment.checked">
+                              <label class="label" for="sponsorship-entertainment">Entertainment</label>
+                            </span>
+                          </td>
+                          <td>
+                            <span class="checkbox-wrapper">
+                              <input type="checkbox" id="sponsorship-quizzes" name="sponsorship" value="Quizzes" v-model="sponsorship.quizzes.checked">
+                              <label class="label" for="sponsorship-quizzes">Quizzes</label>
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <span class="checkbox-wrapper">
+                              <input type="checkbox" id="sponsorship-other" name="sponsorship" value="Other" v-bind:checked="sponsorship.other.checked" v-on:change="updatedSponsorshipOther">
+                              <label class="label" for="sponsorship-other">Other</label>
+                            </span>
+                          </td>
+                          <td colspan="6">
+                            <span class="textarea-wrapper">
+                              <textarea name="sponsorship-other" class="form-control" placeholder="What type of sponsorship are you looking for?" v-bind:disabled="sponsorship.otherText.disabled" v-bind:value="sponsorship.otherText.disabled.value"></textarea>
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="button-wrapper text-right">
+                    <button class="btn btn-default btn-lg" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Add Another Radio Station</button>
+                    <button class="btn btn-primary btn-lg" type="submit">Submit Quote Request <i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+                  </div>
+
                 </div>
               </div>
             </div>

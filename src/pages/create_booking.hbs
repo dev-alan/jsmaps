@@ -178,7 +178,7 @@
 
                   <div class="session-time">
                     
-                    <table class="recorded-advertising-table table">
+                    <table class="recorded-advertising-table table" v-if="currentRecordedAdvertisingItem && currentRecordedAdvertisingItem.sessions">
                       <caption>
                         <h3>Recorded Advertising</h3>
                       </caption>
@@ -200,43 +200,26 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="(prop, key) in currentRecordedAdvertisingItem">
+                        <tr v-for="(obj, key) in currentRecordedAdvertisingItem.sessions">
                           <td data-column="session">
                             <div>
-                              <strong v-text="prop.sessionInfo.title"></strong>
-                              <span v-text="prop.sessionInfo.timeSlot"></span>
+                              <strong v-text="obj.sessionInfo.title"></strong>
+                              <span v-text="obj.sessionInfo.timeSlot"></span>
                             </div>
                           </td>
                           <td data-column="day">
-                            <span class="number-wrapper" data-label="Mon">
-                              <input type="number" min="0" class="form-control">
-                            </span>
-                            <span class="number-wrapper" data-label="Tue">
-                              <input type="number" min="0" class="form-control">
-                            </span>
-                            <span class="number-wrapper" data-label="Wed">
-                              <input type="number" min="0" class="form-control">
-                            </span>
-                            <span class="number-wrapper" data-label="Thur">
-                              <input type="number" min="0" class="form-control">
-                            </span>
-                            <span class="number-wrapper" data-label="Fri">
-                              <input type="number" min="0" class="form-control">
-                            </span>
-                            <span class="number-wrapper" data-label="Say">
-                              <input type="number" min="0" class="form-control">
-                            </span>
-                            <span class="number-wrapper" data-label="Sun">
-                              <input type="number" min="0" class="form-control">
+                            <span class="number-wrapper" v-bind:data-label="day.label" v-for="day in obj.week">
+                              <input type="number" min="0" class="form-control" v-bind:value="day.qty === 0 ? '' : day.qty">
                             </span>
                           </td>
                           <td data-column="active-weeks">
-                            <input type="number" class="form-control">
+                            <input type="number" class="form-control" v-bind:value="obj.activeWeeks === 0 ? '' : day.qty">
                           </td>
                           <td data-column="week-commencing">
-                            <select class="form-control">
+                            <select class="form-control" v-bind:value="obj.weekCommencing.selected">
                               <option value="">Select a date</option>
-                              <option value="Mon 3rd Jul 2017">Mon 3rd Jul 2017</option>
+                              <option v-bind:value="formatDate('ddmmyy', option)" v-for="option in obj.weekCommencing.options" v-text="formatDate('fulldate', option)"></option>
+                              <!-- <option value="Mon 3rd Jul 2017">Mon 3rd Jul 2017</option> -->
                             </select>
                           </td>
                           <td data-column="estimate">
@@ -252,7 +235,7 @@
                       </tfoot>
                     </table>
 
-                    <table class="sponsorship-table table">
+                    <table class="sponsorship-table table" v-if="currentRecordedAdvertisingItem && currentRecordedAdvertisingItem.sponsorship">
                       <caption>
                         <h3>Sponsorship</h3>
                       </caption>
@@ -260,43 +243,43 @@
                         <tr>
                           <td>
                             <span class="checkbox-wrapper">
-                              <input type="checkbox" id="sponsorship-news" name="sponsorship" value="News" v-model="sponsorship.news.checked">
+                              <input type="checkbox" id="sponsorship-news" name="sponsorship" value="News" v-model="currentRecordedAdvertisingItem.sponsorship.news.checked">
                               <label class="label" for="sponsorship-news">News</label>
                             </span>
                           </td>
                           <td>
                             <span class="checkbox-wrapper">
-                              <input type="checkbox" id="sponsorship-sport" name="sponsorship" value="Sport" v-model="sponsorship.sport.checked">
+                              <input type="checkbox" id="sponsorship-sport" name="sponsorship" value="Sport" v-model="currentRecordedAdvertisingItem.sponsorship.sport.checked">
                               <label class="label" for="sponsorship-sport">Sport</label>
                             </span>
                           </td>
                           <td>
                             <span class="checkbox-wrapper">
-                              <input type="checkbox" id="sponsorship-weather" name="sponsorship" value="Weather" v-model="sponsorship.weather.checked">
+                              <input type="checkbox" id="sponsorship-weather" name="sponsorship" value="Weather" v-model="currentRecordedAdvertisingItem.sponsorship.weather.checked">
                               <label class="label" for="sponsorship-weather">Weather</label>
                             </span>
                           </td>
                           <td>
                             <span class="checkbox-wrapper">
-                              <input type="checkbox" id="sponsorship-traffic" name="sponsorship" value="Traffic" v-model="sponsorship.traffic.checked">
+                              <input type="checkbox" id="sponsorship-traffic" name="sponsorship" value="Traffic" v-model="currentRecordedAdvertisingItem.sponsorship.traffic.checked">
                               <label class="label" for="sponsorship-traffic">Traffic</label>
                             </span>
                           </td>
                           <td>
                             <span class="checkbox-wrapper">
-                              <input type="checkbox" id="sponsorship-finance" name="sponsorship" value="Finance" v-model="sponsorship.finance.checked">
+                              <input type="checkbox" id="sponsorship-finance" name="sponsorship" value="Finance" v-model="currentRecordedAdvertisingItem.sponsorship.finance.checked">
                               <label class="label" for="sponsorship-finance">Finance</label>
                             </span>
                           </td>
                           <td>
                             <span class="checkbox-wrapper">
-                              <input type="checkbox" id="sponsorship-entertainment" name="sponsorship" value="Entertainment" v-model="sponsorship.entertainment.checked">
+                              <input type="checkbox" id="sponsorship-entertainment" name="sponsorship" value="Entertainment" v-model="currentRecordedAdvertisingItem.sponsorship.entertainment.checked">
                               <label class="label" for="sponsorship-entertainment">Entertainment</label>
                             </span>
                           </td>
                           <td>
                             <span class="checkbox-wrapper">
-                              <input type="checkbox" id="sponsorship-quizzes" name="sponsorship" value="Quizzes" v-model="sponsorship.quizzes.checked">
+                              <input type="checkbox" id="sponsorship-quizzes" name="sponsorship" value="Quizzes" v-model="currentRecordedAdvertisingItem.sponsorship.quizzes.checked">
                               <label class="label" for="sponsorship-quizzes">Quizzes</label>
                             </span>
                           </td>
@@ -304,13 +287,13 @@
                         <tr>
                           <td>
                             <span class="checkbox-wrapper">
-                              <input type="checkbox" id="sponsorship-other" name="sponsorship" value="Other" v-bind:checked="sponsorship.other.checked" v-on:change="updatedSponsorshipOther">
+                              <input type="checkbox" id="sponsorship-other" name="sponsorship" value="Other" v-bind:checked="currentRecordedAdvertisingItem.sponsorship.other.checked" v-on:change="updatedSponsorshipOther">
                               <label class="label" for="sponsorship-other">Other</label>
                             </span>
                           </td>
                           <td colspan="6">
                             <span class="textarea-wrapper">
-                              <textarea name="sponsorship-other" class="form-control" placeholder="What type of sponsorship are you looking for?" v-bind:disabled="sponsorship.otherText.disabled" v-bind:value="sponsorship.otherText.disabled.value"></textarea>
+                              <textarea name="sponsorship-other" class="form-control" placeholder="What type of sponsorship are you looking for?" v-bind:disabled="currentRecordedAdvertisingItem.sponsorship.otherText.disabled" v-bind:value="currentRecordedAdvertisingItem.sponsorship.otherText.disabled.value"></textarea>
                             </span>
                           </td>
                         </tr>
