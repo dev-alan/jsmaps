@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group">
                       <label for="booking-form-radio-station" class="label">Radio Station</label>
-                      <select name="radio_station" id="booking-form-radio-station" class="form-control" v-model="selectedRadioStation" v-on:change="updateRadioStation">
+                      <select name="radio_station" id="booking-form-radio-station" class="form-control" v-model="selectedRadioStationId" v-on:change="updateRadioStation">
                         <option value="" v-if="radioStations.length > 1 || radioStations.length === 0">-- select --</option>
                         <option v-bind:value="radioStation[0]" v-for="radioStation of radioStations" v-text="radioStation[1]"></option>
                       </select>
@@ -202,25 +202,30 @@
                       <tbody>
                         <tr v-for="(obj, key) in currentRecordedAdvertisingItem.sessions">
                           <td data-column="session">
-                            <div>
+                            <div class="session-wrapper">
                               <strong v-text="obj.sessionInfo.title"></strong>
                               <span v-text="obj.sessionInfo.timeSlot"></span>
                             </div>
                           </td>
                           <td data-column="day">
-                            <span class="number-wrapper" v-bind:data-label="day.label" v-for="day in obj.week">
-                              <input type="number" min="0" class="form-control" v-bind:value="day.qty === 0 ? '' : day.qty">
-                            </span>
+                            <div class="days-wrapper">
+                              <span class="number-wrapper" v-bind:data-label="abbreviateDay(dayKey)" v-for="(day, dayKey) in obj.week">
+                                <input type="number" min="0" class="form-control" v-model="day.qty">
+                              </span>
+                            </div>
                           </td>
                           <td data-column="active-weeks">
-                            <input type="number" class="form-control" v-bind:value="obj.activeWeeks === 0 ? '' : day.qty">
+                            <div class="active-weeks-wrapper">
+                              <input type="number" class="form-control" v-model="obj.activeWeeks">
+                            </div>
                           </td>
                           <td data-column="week-commencing">
-                            <select class="form-control" v-bind:value="obj.weekCommencing.selected">
-                              <option value="">Select a date</option>
-                              <option v-bind:value="formatDate('ddmmyy', option)" v-for="option in obj.weekCommencing.options" v-text="formatDate('fulldate', option)"></option>
-                              <!-- <option value="Mon 3rd Jul 2017">Mon 3rd Jul 2017</option> -->
-                            </select>
+                            <div class="week-commencing">
+                              <select class="form-control" v-model="obj.weekCommencing">
+                                <option value="">Select a date</option>
+                                <option v-bind:value="formatDate('ddmmyy', option)" v-for="option in mondaysX30" v-text="formatDate('fulldate', option)"></option>
+                              </select>
+                            </div>
                           </td>
                           <td data-column="estimate">
                             <span class="subtotal"></span>
@@ -302,8 +307,150 @@
                   </div>
 
                   <div class="button-wrapper text-right">
-                    <button class="btn btn-default btn-lg" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Add Another Radio Station</button>
+                    <button class="btn btn-default btn-lg" type="button" v-on:click="saveRecordedAdvertisingItem"><i class="fa fa-plus" aria-hidden="true"></i> Add Another Radio Station</button>
                     <button class="btn btn-primary btn-lg" type="submit">Submit Quote Request <i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+                  </div>
+
+                  <!-- repeat blocks -->
+                  <div v-if="savedRecordedAdvertisingItems.length" class="saved">
+                    <div v-for="(savedRecordedAdvertisingItem, index) in savedRecordedAdvertisingItems">
+                      <div class="summary">
+                        <table class="recorded-advertising-table table" v-if="savedRecordedAdvertisingItem.sessions">
+                          <caption>
+                            <h3>Recorded Advertising</h3>
+                          </caption>
+                          <thead>
+                            <tr>
+                              <th data-column="session">Session</th>
+                              <th data-column="day">
+                                <span>Mon</span>
+                                <span>Tue</span>
+                                <span>Wed</span>
+                                <span>Thur</span>
+                                <span>Fri</span>
+                                <span>Sat</span>
+                                <span>Sun</span>
+                              </th>
+                              <th data-column="active-weeks">Active Weeks</th>
+                              <th data-column="week-commencing">Week Commencing</th>
+                              <th data-column="estimate">Estimate</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="(obj, key) in savedRecordedAdvertisingItem.sessions">
+                              <td data-column="session">
+                                <div class="session-wrapper">
+                                  <strong v-text="obj.sessionInfo.title"></strong>
+                                  <span v-text="obj.sessionInfo.timeSlot"></span>
+                                </div>
+                              </td>
+                              <td data-column="day">
+                                <div class="days-wrapper">
+                                  <span class="number-wrapper" v-bind:data-label="abbreviateDay(dayKey)" v-for="(day, dayKey) in obj.week">
+                                    <input type="number" min="0" class="form-control" v-model="day.qty">
+                                  </span>
+                                </div>
+                              </td>
+                              <td data-column="active-weeks">
+                                <div class="active-weeks-wrapper">
+                                  <input type="number" class="form-control" v-model="obj.activeWeeks">
+                                </div>
+                              </td>
+                              <td data-column="week-commencing">
+                                <div class="week-commencing">
+                                  <select class="form-control" v-model="obj.weekCommencing">
+                                    <option value="">Select a date</option>
+                                    <option v-bind:value="formatDate('ddmmyy', option)" v-for="option in mondaysX30" v-text="formatDate('fulldate', option)"></option>
+                                  </select>
+                                </div>
+                              </td>
+                              <td data-column="estimate">
+                                <span class="subtotal"></span>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td colspan="4" class="text-right">
+                                <strong>Total Estimate</strong>
+                              </td>
+                              <td>
+                                <span>$5,000</span>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+
+                        <table class="sponsorship-table table" v-if="savedRecordedAdvertisingItem.sponsorship">
+                          <caption>
+                            <h3>Sponsorship</h3>
+                          </caption>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <span class="checkbox-wrapper">
+                                  <input type="checkbox" v-bind:id="'sponsorship-news-' + index" name="sponsorship" value="News" v-model="savedRecordedAdvertisingItem.sponsorship.news.checked">
+                                  <label class="label" v-bind:for="'sponsorship-news-' + index">News</label>
+                                </span>
+                              </td>
+                              <td>
+                                <span class="checkbox-wrapper">
+                                  <input type="checkbox" v-bind:id="'sponsorship-sport-' + index" name="sponsorship" value="Sport" v-model="savedRecordedAdvertisingItem.sponsorship.sport.checked">
+                                  <label class="label" v-bind:for="'sponsorship-sport-' + index">Sport</label>
+                                </span>
+                              </td>
+                              <td>
+                                <span class="checkbox-wrapper">
+                                  <input type="checkbox" v-bind:id="'sponsorship-weather-' + index" name="sponsorship" value="Weather" v-model="savedRecordedAdvertisingItem.sponsorship.weather.checked">
+                                  <label class="label" v-bind:for="'sponsorship-weather-' + index">Weather</label>
+                                </span>
+                              </td>
+                              <td>
+                                <span class="checkbox-wrapper">
+                                  <input type="checkbox" v-bind:id="'sponsorship-traffic-' + index" name="sponsorship" value="Traffic" v-model="savedRecordedAdvertisingItem.sponsorship.traffic.checked">
+                                  <label class="label" v-bind:for="'sponsorship-traffic-' + index">Traffic</label>
+                                </span>
+                              </td>
+                              <td>
+                                <span class="checkbox-wrapper">
+                                  <input type="checkbox" v-bind:id="'sponsorship-finance-' + index" name="sponsorship" value="Finance" v-model="savedRecordedAdvertisingItem.sponsorship.finance.checked">
+                                  <label class="label" v-bind:for="'sponsorship-finance-' + index">Finance</label>
+                                </span>
+                              </td>
+                              <td>
+                                <span class="checkbox-wrapper">
+                                  <input type="checkbox" v-bind:id="'sponsorship-entertainment' + index" name="sponsorship" value="Entertainment" v-model="savedRecordedAdvertisingItem.sponsorship.entertainment.checked">
+                                  <label class="label" v-bind:for="'sponsorship-entertainment' + index">Entertainment</label>
+                                </span>
+                              </td>
+                              <td>
+                                <span class="checkbox-wrapper">
+                                  <input type="checkbox" v-bind:id="'sponsorship-quizzes-' + index" name="sponsorship" value="Quizzes" v-model="savedRecordedAdvertisingItem.sponsorship.quizzes.checked">
+                                  <label class="label" v-bind:for="'sponsorship-quizzes-' + index">Quizzes</label>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span class="checkbox-wrapper">
+                                  <input type="checkbox" v-bind:id="'sponsorship-other-' + index" name="sponsorship" value="Other" v-bind:checked="savedRecordedAdvertisingItem.sponsorship.other.checked"
+                                    v-on:change="updatedSponsorshipOther">
+                                  <label class="label" v-bind:for="'sponsorship-other-' + index">Other</label>
+                                </span>
+                              </td>
+                              <td colspan="6">
+                                <span class="textarea-wrapper">
+                                  <textarea name="sponsorship-other" class="form-control" placeholder="What type of sponsorship are you looking for?" v-bind:disabled="savedRecordedAdvertisingItem.sponsorship.otherText.disabled"
+                                    v-bind:value="savedRecordedAdvertisingItem.sponsorship.otherText.disabled.value"></textarea>
+                                </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                      <button type="button" class="btn btn-remove" v-bind:data-index="index" v-on:click="removeRecordedAdvertisingItem(index)">x</button>
+                    </div>
                   </div>
 
                 </div>

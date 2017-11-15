@@ -51,7 +51,7 @@
 
 /* overrides */
 button, .btn {cursor:pointer;}
-.btn {max-width:100%;white-space:normal;.uppercase;letter-spacing:.25rem;font-size:2rem;line-height:3rem;padding:1.6rem 3rem;border-radius:((3 + 2 * 1.6) / 2rem);width:23.5rem;}
+.btn {max-width:100%;white-space:normal;.uppercase;letter-spacing:.25rem;font-size:2rem;line-height:3rem;padding:1.6rem 3rem;border-radius:((3 + 2 * 1.6) / 2rem);width:auto;}
 .btn-primary, a.btn-primary {
   background:@lime-green;color:@white;border-color:@lime-green;
   &:active, &:focus, &:hover, &:not([disabled]):not(.disabled):active, &:not([disabled]):not(.disabled).active, .show > &.dropdown-toggle {
@@ -149,9 +149,9 @@ a {
   .pos-relative;.flex-row;.flex-nowrap;
   [type="checkbox"] {width:0.1rem;height:0.1rem;border:0;background:transparent;margin:0;padding:0;.pos-absolute;left:1px;top:1px;opacity:0;z-index:1;}
   .label {
-    .pos-relative;z-index:2;.flex-row;.flex-wrap;.light;font-size:2rem;line-height:(3 / 2em);min-height:3.6rem;cursor:pointer;align-items:center;
+    .pos-relative;z-index:2;.flex-row;.flex-wrap;.light;font-size:2rem;line-height:(3 / 2em);min-height:4rem;cursor:pointer;align-items:center;
     &:before {
-      content:' ';width:3.6rem;height:3.6rem;border:1px solid @light-grey;.inline-block;.text-center;line-height:~"calc(3.6rem - 2px)";background:@white;cursor:pointer;margin:auto 1.5rem auto 0;.font-awesome;
+      content:' ';width:4rem;height:4rem;border:1px solid @light-grey;.inline-block;.text-center;line-height:~"calc(4rem - 2px)";background:@white;cursor:pointer;margin:auto 1.5rem auto 0;.font-awesome;
     
       @media(max-width:@xs) {
         width:2.4rem;height:2.4rem;line-height:~"calc(2.4rem - 2px)";margin-right:1rem;
